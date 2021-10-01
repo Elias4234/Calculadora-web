@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Calculadora online</title>
+	<link rel="stylesheet" href="Retoques.css">
+	<style>
+	
+	input[type=button]
+	{
+	background-color: white;
+	border: none;
+	color: black;
+	font-weight: bold;
+	padding: 6px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	margin: 4px 4px;
+	cursor: pointer;
+	box-shadow: 4px 4px 4px black;
+	}
+	
+	input[type="text"]
+	{
+	border: solid;
+	color: black;
+	padding: 15px 32;
+	text-align: right;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 25px;
+	margin: 4px 2px;
+	cursor: pointer;
+	width: 98%
+	box-shadow: 3px 3px 3px black;
+	}
+	
+	table
+	{
+	background-color: #E4E7EA;
+	padding: 5px 5px;
+	}
+	
+	</style>
+<script type ="text/javascript">
+	
+	var numpantalla = "0";
+	var pantallaconnum = "si"; //Si o No
+	var usarpunto = "no"; //Si o No
+	var numespera = 0;
+	var operapendiente = "";
+	var solucion = "";
+	
+	function ingresarnumero(x)
+	{
+	  if(x!=".")
+	  {
+	      if(numpantalla == "0" || pantallaconnum == "si")
+	      {
+		    document.Calculadora.txtborn.value = x;
+			numpantalla = x;
+		  }
+	     else if(x!=".")
+	      {
+		    document.Calculadora.txtborn.value+= x;
+			numpantalla+= x;
+	 	  }
+	  }
+	  if(x =="." && usarpunto == "no" && numpantalla == "0")
+	    {
+		   document.Calculadora.txtborn.value= "0.";
+		   numpantalla = x;
+		   usarpunto= "si";
+		}
+	  else if(x == "." && usarpunto == "no")
+	    { 
+		   document.Calculadora.txtborn.value +=x;
+		   numpantalla +=x;
+		   usarpunto = "si";
+		}
+	  else if(x == "." && usarpunto == "si")
+	    {
+		
+		}
+		pantallaconnum ="no";
+		
+	}
+	
+	function ingresaroperacion (y)
+	{
+	if (operapendiente =="")
+	{
+	
+	numespera = document.Calculadora.txtborn.value;
+	document.Calculadora.txtborn.value +=y;
+	operapendiente = y;
+	pantallaconnum = "no";
+	numpantalla = "";
+	usarpunto = "no";
+	
+	}
+	
+	}
+	
+	function resultado()
+	{
+	
+	if(operapendiente != "")
+	{
+	solucion = numespera+operapendiente+numpantalla;
+	document.Calculadora.txtborn.value = eval(solucion);
+	numpantalla = eval(solucion);
+	pantallaconnum = "si";
+	operapendiente = "";
+	usarpunto = "no";
+	
+	}
+	
+	}
+	
+	function raiz()
+	{
+	
+	if(operapendiente == "")
+	{
+	document.Calculadora.txtborn.value = Math.sqrt(numpantalla);
+	pantallaconnum = "si";
+	operapendiente = "";
+	usarpunto = "no";
+	}
+	
+	}
+	
+	function limpiar ()
+	{
+	
+	 numpantalla = "0";
+	 pantallaconnum = "si"; 
+	 usarpunto = "no"; 
+	 numespera = 0;
+	 operapendiente = "";
+	 solucion = "";
+	 document.Calculadora.txtborn.value ="0"; 
+	
+	}
+</script>	
+	
+  </head>
+  <body>
+    <div class="subtit">
+           <h3> Esta es una página para calcular </h3>           
+    </div>
+	<center>
+
+    <form name = "Calculadora">	
+	
+		<table border = "3">
+		<tr>
+		<td colspan = "5"> <input type = "text" name = "txtborn" value = "0" disabled> 
+		</td></tr>
+		
+		<tr>
+		<td> <input type = "button" value ="1" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="2" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="3" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="+" onclick = "ingresaroperacion(this.value)"></td>
+		<td> <input type = "button" value ="-" onclick = "ingresaroperacion(this.value)"></td>
+		</tr>
+		
+		<tr>
+		<td> <input type = "button" value ="4" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="5" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="6" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="*" onclick = "ingresaroperacion(this.value)"></td>
+		<td> <input type = "button" value ="/" onclick = "ingresaroperacion(this.value)"></td>
+		</tr>
+		
+		<tr>
+		<td> <input type = "button" value ="7" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="8" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="9" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="^" onclick = "ingresaroperacion()"></td>
+		<td> <input type = "button" value ="√" onclick = "raiz()"></td>
+		</tr>
+		
+		<tr>
+		<td> <input type = "button" value ="0" onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="." onclick = "ingresarnumero(this.value)"></td>
+		<td> <input type = "button" value ="C" onclick = "limpiar()"></td>
+		<td colspan = "2"> <input type = "button" value ="      =      " onclick = "resultado()"></td>
+		</tr>
+		
+		</table>
+	</form>
+	
+    </center>	
+	<div class="copyright">
+           <p> &copy; 2021 Mi Pagina WEB. Todos los derechos reservados. </p>
+    </div>
+  </body>
+</html>
